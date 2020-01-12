@@ -1,8 +1,8 @@
-const someCommonValues = ['getCoinDenominations', 'justAnAlert'];
+export const Values = ['getCoinDenominations'];
 
 export const getCoinDenominations = (dollarInput) => {
 
-    let fract = (dollarInput+"").indexOf(".") !== -1
+    let fractionValue = (dollarInput+"").indexOf(".") !== -1
         ? ((dollarInput+"").substring((dollarInput+"").indexOf(".")+1))
         : 0;
     let dollarBill = Math.trunc(dollarInput);
@@ -12,28 +12,28 @@ export const getCoinDenominations = (dollarInput) => {
     let nickel = 0;
     let penny;
 
-    while(fract >= 50) {
+    while(fractionValue >= 50) {
         halfDollar++;
-        fract = fract - 50;
+        fractionValue = fractionValue - 50;
     }
-    while(fract >= 25) {
+    while(fractionValue >= 25) {
         quarter++;
-        fract = fract - 25;
+        fractionValue = fractionValue - 25;
     }
-    while(fract >= 10) {
+    while(fractionValue >= 10) {
         dime++;
-        fract = fract - 10;
+        fractionValue = fractionValue - 10;
     }
-    while(fract >= 5) {
+    while(fractionValue >= 5) {
         nickel++;
-        fract = fract - 5;
+        fractionValue = fractionValue - 5;
     }
 
-    penny = fract;
+    penny = fractionValue;
 
     let denominations = {
         "silverDollar": dollarBill,
-        "half-dollar": halfDollar,
+        "halfDollar": halfDollar,
         "quarter": quarter,
         "dime": dime,
         "nickel": nickel,
@@ -42,8 +42,4 @@ export const getCoinDenominations = (dollarInput) => {
 
     return denominations;
 
-};
-
-export const justAnAlert = () => {
-    // alert('hello');
 };

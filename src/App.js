@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {getCoinDenominations, justAnAlert} from './Utils'
-
-let coinDenominations = null;
+import {getCoinDenominations} from './Utils'
 
 export default class App extends Component {
 
@@ -10,7 +8,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             enteredValue : '',
-            coinDenominations: null
+            result: ''
         }
         this.updateInput = this.updateInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,15 +19,10 @@ export default class App extends Component {
     }
 
     handleSubmit(){
-        console.log('Your input value is: ' + this.state.enteredValue);
-        coinDenominations = getCoinDenominations(this.state.enteredValue);
-        console.log("coinDenominations="+JSON.stringify(coinDenominations));
-        console.log("coinDenominations.silverDollar="+coinDenominations.silverDollar);
-        justAnAlert();
+        this.setState({result : getCoinDenominations(this.state.enteredValue)});
     }
 
     render(){
-        // const coinDenominations = this.state.coinDenominations;
         return (
             <div className="App">
                 <div className="row">
@@ -39,30 +32,55 @@ export default class App extends Component {
                     <input className="text-input" type="Submit" onClick={this.handleSubmit} ></input>
                 </div>
                 <div className="row">
-                    <span className="label-element">Silver Dollar :</span>
-                    <span className="label-element">Silver Dollar :</span>
+                    <table className="table ">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Denominations</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Dollar</td>
+                            <td>1</td>
+                            <td>{this.state.result.silverDollar}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Half Dollar</td>
+                            <td>0.5</td>
+                            <td>{this.state.result.halfDollar}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Quarter</td>
+                            <td>0.25</td>
+                            <td>{this.state.result.quarter}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Dime</td>
+                            <td>0.10</td>
+                            <td>{this.state.result.dime}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Nickel</td>
+                            <td>0.05</td>
+                            <td>{this.state.result.nickel}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Penny</td>
+                            <td>0.01</td>
+                            <td>{this.state.result.penny}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div className="row">
-                    <span className="label-element">Half Dollar Value:</span>
-                    <span className="label-element">Half Dollar Value:</span>
-                </div>
-                <div className="row">
-                    <span className="label-element">Quarter:</span>
-                    <span className="label-element">Quarter:</span>
-                </div>
-                <div className="row">
-                    <span className="label-element">Dime:</span>
-                    <span className="label-element">Dime</span>
-                </div>
-                <div className="row">
-                    <span className="label-element">Nickel:</span>
-                    <span className="label-element">Nickel</span>
-                </div>
-                <div className="row">
-                    <span className="label-element">Penny:</span>
-                    <span className="label-element">Penny</span>
-                </div>
-
             </div>
         );
     }
