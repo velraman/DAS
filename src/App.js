@@ -18,6 +18,7 @@ export default class App extends Component {
         this.setState({enteredValue : event.target.value})
     }
 
+    // after submit button pressed, the result from util is stored in state to pass values in below html table.
     handleSubmit(){
         this.setState({result : getCoinDenominations(this.state.enteredValue)});
     }
