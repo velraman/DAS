@@ -8,7 +8,8 @@ export default class App extends Component {
         super(props);
         this.state = {
             enteredValue : '',
-            result: ''
+            result: '',
+            totalCoins: ''
         }
         this.updateInput = this.updateInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +21,10 @@ export default class App extends Component {
 
     // after submit button pressed, the result from util is stored in state to pass values in below html table.
     handleSubmit(){
-        this.setState({result : getCoinDenominations(this.state.enteredValue)});
+        let coins = getCoinDenominations(this.state.enteredValue);
+        this.setState({result : coins});
+        this.setState({totalCoins:
+                coins.silverDollar+coins.halfDollar+coins.quarter+coins.penny+coins.nickel+coins.dime});
     }
 
     render(){
@@ -30,7 +34,8 @@ export default class App extends Component {
 			        <span className="label-element">Enter Dollar Value:</span>
                     <input type="text" name="dollarAmount"  onChange={this.updateInput}
                            className="text-input"/>
-                    <input className="text-input" type="Submit" onClick={this.handleSubmit} ></input>
+                    <button className="text-input" onClick={this.handleSubmit}>Submit</button>
+                    {/*<input className="text-input" type="Submit" onClick={this.handleSubmit} ></input>*/}
                 </div>
                 <div className="row">
                     <table className="table ">
@@ -79,11 +84,16 @@ export default class App extends Component {
                             <td>0.01</td>
                             <td>{this.state.result.penny}</td>
                         </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td></td>
+                            <td>Total Coins</td>
+                            <td id="result">{this.state.totalCoins}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         );
     }
-
 }
